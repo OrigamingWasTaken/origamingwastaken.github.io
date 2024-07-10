@@ -10,6 +10,7 @@
 	let content: HTMLElement;
 	let background: HTMLElement;
 	let projects: HTMLElement;
+	let scrollArrow: HTMLElement;
 	
 	const techStack = [
 		{ name: "JavaScript", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
@@ -99,74 +100,92 @@
 		opacity: 0,
 		scale: 0.95,
 	  });
+
+	  // Scroll arrow animation
+	  gsap.to(scrollArrow, {
+		y: 10,
+		opacity: 0.5,
+		duration: 1,
+		repeat: -1,
+		yoyo: true,
+		ease: "power1.inOut"
+	  });
 	});
 	</script>
 	
-	<main class="relative min-h-[200vh] overflow-x-hidden bg-black text-green-400 font-mono">
-	  <div class="glitch-effect"></div>
-	  <div class="h-screen flex items-center justify-center">
-		<h1 bind:this={title} class="text-6xl text-shadow shadow-green-400 text-center z-10 glitch" data-text="Origaming">
-		  Origaming
-		</h1>
-	  </div>
-	  <div bind:this={content} class="min-h-[50vh] flex items-start justify-center pt-20">
-		<div class="bg-black/50 border border-green-400 p-8 rounded-lg shadow-lg max-w-2xl w-full">
-		  <h2 class="text-3xl font-bold mb-4 glitch" data-text="Welcome to My Code Realm">Welcome to My Code Realm</h2>
-		  <p class="mb-4">
-			I'm Origaming (she/he) and I am a passionate fullstack developper! I'm currently using TypeScript, Bash, and Python, and hope to learn 🦀 Rust in the future!
-		  </p>
-		  <p class="mb-4">
-			But coding and solving problems is not my only passion... I also love playing the drums and cycling :D
-		  </p>
-		  <p class="mb-4">
-			Scroll through my digital tapestry and discover the projects that define my journey as a developer.
-		  </p>
-		  <h3 class="text-2xl font-bold mb-2">Tech Stack</h3>
-		  <div class="flex flex-wrap gap-2 mb-4">
-			{#each techStack as tech}
-			  <a href={tech.url} target="_blank" rel="noopener noreferrer" class="px-2 py-1 bg-green-400/20 text-green-300 rounded hover:bg-green-400/30 transition-colors duration-300">
-				{tech.name}
-			  </a>
-			{/each}
-		  </div>
-		  <div class="mt-6 flex justify-center space-x-4">
-			<a href={`https://github.com/OrigamingWasTaken`} target="_blank" rel="noopener noreferrer" class="github-icon">
-			  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hover:text-green-300 transition-colors duration-300">
-				<path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-			  </svg>
-			</a>
-			<a href={`mailto:contact@origaming.ch`} class="email-icon">
-			  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hover:text-green-300 transition-colors duration-300">
-				<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-				<polyline points="22,6 12,13 2,6"></polyline>
-			  </svg>
-			</a>
+	<main class="overflow-y-clip relative min-h-[200vh] bg-black text-green-400 font-mono">
+		<div class="glitch-effect"></div>
+		<div class="h-screen flex flex-col items-center justify-center relative">
+		  <h1 bind:this={title} class="text-6xl text-shadow shadow-green-400 text-center z-10 glitch" data-text="Origaming">
+			Origaming
+		  </h1>
+		  <div bind:this={scrollArrow} class="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer">
+			<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-400">
+			  <path d="M12 5v14M19 12l-7 7-7-7"/>
+			</svg>
 		  </div>
 		</div>
-	  </div>
-	  <div bind:this={projects} class="min-h-[50vh] flex items-start justify-center pt-20 pb-20">
-		<div class="bg-black/50 border border-green-400 p-8 rounded-lg shadow-lg max-w-2xl w-full">
-		  <h2 class="text-3xl font-bold mb-6 glitch" data-text="My Projects">My Projects</h2>
-		  <div class="space-y-6">
-			{#each projectList as project}
-			  <div class="border border-green-400 p-4 rounded-lg hover:bg-green-400/10 transition-colors duration-300">
-				<h3 class="text-xl font-bold mb-2">{project.name}</h3>
-				<p class="mb-2">{project.description}</p>
-				<a href={project.url} target="_blank" rel="noopener noreferrer" class="text-green-300 hover:text-green-100 transition-colors duration-300">
-				  View on GitHub &rarr;
+		<div bind:this={content} class="min-h-[50vh] flex items-start justify-center pt-20">
+		  <div class="bg-black/50 border border-green-400 p-8 rounded-lg shadow-lg max-w-2xl w-full">
+			<h2 class="text-3xl font-bold mb-4 glitch" data-text="Welcome to My Code Realm">Welcome to My Code Realm</h2>
+			<p class="mb-4">
+				I'm Origaming (she/he) and I am a passionate fullstack developper! I know TypeScript, Bash, and Python, and hope to learn 🦀 Rust in the future!
+			  </p>
+			  <p class="mb-4">
+				But coding and solving problems is not my only passion. I also love playing the drums and cycling :D
+			  </p>
+			  <p class="mb-4">
+				Now, scroll down through the projects that made the developper I am today...
+			  </p>
+			<h3 class="text-2xl font-bold mb-2">Tech Stack</h3>
+			<div class="flex flex-wrap gap-2 mb-4">
+			  {#each techStack as tech}
+				<a href={tech.url} target="_blank" rel="noopener noreferrer" class="px-2 py-1 bg-green-400/20 text-green-300 rounded hover:bg-green-400/30 transition-colors duration-300">
+				  {tech.name}
 				</a>
-			  </div>
-			{/each}
+			  {/each}
+			</div>
+			<div class="mt-6 flex justify-center space-x-4">
+				<a href={`https://github.com/OrigamingWasTaken`} target="_blank" rel="noopener noreferrer" class="github-icon">
+				  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hover:text-green-300 transition-colors duration-300">
+					<path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+				  </svg>
+				</a>
+				<a href={`mailto:contact@origaming.ch`} class="email-icon">
+				  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hover:text-green-300 transition-colors duration-300">
+					<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+					<polyline points="22,6 12,13 2,6"></polyline>
+				  </svg>
+				</a>
+			</div>
 		  </div>
 		</div>
-	  </div>
-	  <div bind:this={background} class="fixed inset-x-0 bottom-0 overflow-visible flex justify-center items-center pointer-events-none">
-		<div class="absolute bottom-0 h-[100vw] bg-gradient-to-t from-green-500 to-transparent w-full rounded-full transform -translate-x-1/2 translate-y-1/2 opacity-20">
+		<div bind:this={projects} class="min-h-[50vh] flex items-start justify-center pt-20 pb-20">
+		  <div class="bg-black/50 border border-green-400 p-8 rounded-lg shadow-lg max-w-2xl w-full">
+			<h2 class="text-3xl font-bold mb-6 glitch" data-text="My Projects">My Projects</h2>
+			<div class="space-y-6">
+			  {#each projectList as project}
+			  <div>
+				<button class="w-full border border-green-400 p-4 rounded-lg hover:bg-green-400/10 transition-colors duration-300 focus">
+					<h3 class="text-xl font-bold mb-2">{project.name}</h3>
+					<p class="mb-2">{project.description}</p>
+					<a href={project.url} target="_blank" rel="noopener noreferrer" class="text-green-300 hover:text-green-100 transition-colors duration-300">
+					  View on GitHub &rarr;
+					</a>
+				  </button>
+			  </div>
+			  {/each}
+			</div>
+		  </div>
 		</div>
-	  </div>
-	</main>
+		<div bind:this={background} class="fixed inset-x-0 bottom-0 overflow-visible flex justify-center items-center pointer-events-none">
+		  <div class="absolute bottom-0 h-[100vw] bg-gradient-to-t from-green-500 to-transparent w-full rounded-full transform -translate-x-1/2 translate-y-1/2 opacity-20">
+		  </div>
+		</div>
+	  </main>
 	
 	<style>
+
 	  :global(html, body) {
 		overflow-x: hidden;
 		background-color: black;
@@ -315,4 +334,6 @@
 	  .email-icon:hover svg {
 		filter: drop-shadow(0 0 5px #4ade80);
 	  }
+
+	  
 	</style>
