@@ -166,13 +166,12 @@
 			<div class="space-y-6">
 			  {#each projectList as project}
 			  <div>
-				<button class="w-full border border-green-400 p-4 rounded-lg hover:bg-green-400/10 transition-colors duration-300 focus">
+				<a href={project.url} class="text-green-300 hover:text-green-200">
+					<button class="w-full border border-green-400 p-4 rounded-lg hover:bg-green-400/10 transition-colors duration-300 focus">
 					<h3 class="text-xl font-bold mb-2">{project.name}</h3>
 					<p class="mb-2">{project.description}</p>
-					<a href={project.url} target="_blank" rel="noopener noreferrer" class="text-green-300 hover:text-green-100 transition-colors duration-300">
-					  View on GitHub &rarr;
-					</a>
 				  </button>
+				</a>
 			  </div>
 			  {/each}
 			</div>
