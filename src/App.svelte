@@ -129,10 +129,10 @@
 		  <div class="bg-black/50 border border-green-400 p-8 rounded-lg shadow-lg max-w-2xl w-full">
 			<h2 class="text-3xl font-bold mb-4 glitch" data-text="Welcome to My Code Realm">Welcome to My Code Realm</h2>
 			<p class="mb-4">
-				I'm Origaming (she/he) and I am a passionate fullstack developper! I know TypeScript, Bash, and Python, and hope to learn 🦀 Rust in the future!
+				I'm Origaming (she/he) and I am a passionate fullstack developper! I know TypeScript, Bash, and Python, and hope to learn 🦀 Rust in the future.
 			  </p>
 			  <p class="mb-4">
-				But coding and solving problems is not my only passion. I also love playing the drums and cycling :D
+				But coding and solving problems is not my only passion. I also love playing the drums and cycling ^^.
 			  </p>
 			  <p class="mb-4">
 				Now, scroll down through the projects that made the developper I am today...
@@ -166,10 +166,11 @@
 			<div class="space-y-6">
 			  {#each projectList as project}
 			  <div>
-				<a href={project.url} class="text-green-300 hover:text-green-200">
-					<button class="w-full border border-green-400 p-4 rounded-lg hover:bg-green-400/10 transition-colors duration-300 focus">
+				<a href={project.url} class="text-green-300 ">
+					<button class="w-full border border-green-400 hover:border-green-300 p-4 rounded-lg hover:bg-green-400/10 transition-colors duration-300 focus">
 					<h3 class="text-xl font-bold mb-2">{project.name}</h3>
 					<p class="mb-2">{project.description}</p>
+					<p>View on GitHub &rarr;</p>
 				  </button>
 				</a>
 			  </div>
